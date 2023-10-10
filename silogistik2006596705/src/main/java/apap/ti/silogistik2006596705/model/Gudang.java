@@ -19,7 +19,6 @@ import lombok.Setter;
 public class Gudang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NotNull
