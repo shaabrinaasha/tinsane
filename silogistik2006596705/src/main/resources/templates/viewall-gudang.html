@@ -31,8 +31,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="gudang: ${gudangs}">
-              <td th:text="${gudang.id}"></td>
+            <tr th:each="gudang, iStat: ${gudangs}">
+              <td th:text="${iStat.index + 1}"></td>
               <td th:text="${gudang.nama}"></td>
               <td th:text="${gudang.alamatGudang}"></td>
               <td class="d-flex justify-content-center">

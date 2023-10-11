@@ -31,4 +31,14 @@ public class GudangServiceImpl implements GudangService {
         return gudangDb.findAll();
     }
 
+    @Override
+    public Gudang getGudangById(Long id) {
+        for (Gudang gudang : getAllGudang()) {
+            if (gudang.getId() == id) {
+                return gudang;
+            }
+        }
+        return null;
+    }
+
 }
