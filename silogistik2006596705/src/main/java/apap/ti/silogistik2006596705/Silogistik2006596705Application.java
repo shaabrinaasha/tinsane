@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import com.github.javafaker.Faker;
 
 import apap.ti.silogistik2006596705.DTO.GudangMapper;
+import apap.ti.silogistik2006596705.DTO.KaryawanMapper;
 import apap.ti.silogistik2006596705.service.GudangService;
+import apap.ti.silogistik2006596705.service.KaryawanService;
 import apap.ti.silogistik2006596705.DTO.CreateGudangRequestDTO;
 import jakarta.transaction.Transactional;
 
@@ -22,7 +24,8 @@ public class Silogistik2006596705Application {
 
 	@Bean
 	@Transactional
-	CommandLineRunner run(GudangService gudangService, GudangMapper gudangMapper) {
+	CommandLineRunner run(GudangService gudangService, GudangMapper gudangMapper, KaryawanService karyawanService,
+			KaryawanMapper karyawanMapper) {
 		return args -> {
 			var faker = new Faker(new Locale("in-ID"));
 
@@ -34,6 +37,10 @@ public class Silogistik2006596705Application {
 			// Map GudangDTO to Gudang to be saved via service via jpa
 			var gudang = gudangMapper.createGudangRequestDTOToGudang(gudangDTO);
 			gudangService.saveGudang(gudang);
+
+			// Create KaryawanDTO to be filled with data from javafaker
+
+			// Map KaryawanDTO to be
 		};
 	}
 

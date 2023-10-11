@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Validation Error</title>
+  </head>
+
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="container">
+      <div class="card m-4 p-4 bg-danger text-white">
+        <div class="text-center">
+          <h2>Data Tidak Valid</h2>
+          <h5 th:text="${errorMessage}"></h5>
+          <h3><em>Silahkan isi ulang data</em></h3>
+        </div>
+        <div class="text-center m-3">
+          <a type="button" class="btn btn-md btn-primary" href="/buku/create"
+            >Kembali ke form</a
+          >
+          <a type="button" class="btn btn-md btn-primary" href="/buku/viewall"
+            >Lihat Semua Buku</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

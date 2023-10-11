@@ -1,5 +1,7 @@
 package apap.ti.silogistik2006596705.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,17 @@ public class GudangServiceImpl implements GudangService {
     @Override
     public void saveGudang(Gudang gudang) {
         gudangDb.save(gudang);
+    }
+
+    // count rows of gudang via jpa
+    @Override
+    public Long countGudang() {
+        return gudangDb.count();
+    }
+
+    @Override
+    public List<Gudang> getAllGudang() {
+        return gudangDb.findAll();
     }
 
 }

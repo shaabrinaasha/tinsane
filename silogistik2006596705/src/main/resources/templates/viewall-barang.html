@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>View All Barang</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-md-12 mt-5 text-center">
+        <h1>Daftar Barang</h1>
+      </div>
+      <div class="col-md-12 d-flex justify-content-center mt-3 mb-5">
+        <a type="button" class="btn btn-md btn-primary" href="/barang/tambah"
+          >+ Tambah Barang</a
+        >
+      </div>
+      <div class="col-md-10">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr class="table-dark">
+              <th scope="col">#</th>
+              <th scope="col">SKU</th>
+              <th scope="col">Merk</th>
+              <th scope="col">Stok</th>
+              <th scope="col">Harga</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="barang, iStat: ${barangs}">
+              <td th:text="${iStat.index + 1}"></td>
+              <td th:text="${barang.sku}"></td>
+              <td th:text="${barang.merk}"></td>
+              <td>Stok</td>
+              <td th:text="${barang.hargaBarang}"></td>
+              <td class="d-flex justify-content-center">
+                <a type="button" class="btn btn-md btn-secondary" href="/"
+                  >Detail</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

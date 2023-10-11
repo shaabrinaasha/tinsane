@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Tambah Barang</title>
+    <title>Success Create Barang</title>
+  </head>
+
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="container">
+      <div class="card m-4 p-4">
+        <div class="text-center">
+          <h2
+            th:text="'Barang dengan SKU ' + ${sku} + ' berhasil ditambahkan.'"
+          ></h2>
+        </div>
+        <div class="text-center m-3">
+          <a type="button" class="btn btn-md btn-primary" href="/">Home</a>
+          <a type="button" class="btn btn-md btn-primary" href="/buku/viewall"
+            >Lihat Semua Barang</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
