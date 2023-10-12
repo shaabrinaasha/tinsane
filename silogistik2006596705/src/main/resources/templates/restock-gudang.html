@@ -23,17 +23,17 @@
         <div class="m-4 mb-2 px-3">
           <p style="display: inline; margin-right: 275px">Nama Gudang</p>
           <p style="display: inline">
-            : <span th:text="${gudang.nama}"></span>
+            : <span th:text="${gudangDTO.nama}"></span>
           </p>
         </div>
         <div class="m-4 px-3">
           <p style="display: inline; margin-right: 270px">Alamat Gudang</p>
           <p style="display: inline">
-            : <span th:text="${gudang.alamatGudang}"></span>
+            : <span th:text="${gudangDTO.alamatGudang}"></span>
           </p>
         </div>
         <form
-          th:action="@{/gudang/{idGudang}/restock-barang(idGudang=${gudang.id})}"
+          th:action="@{/gudang/{idGudang}/restock-barang(idGudang=${gudangDTO.id})}"
           th:object="${gudangDTO}"
           method="POST"
         >
@@ -46,6 +46,17 @@
               + Tambah Barang
             </button>
           </div>
+          <!-- Hidden Input id -->
+          <input class="form-control" type="hidden" th:field="*{id}" />
+          <!-- Hidden Input nama -->
+          <input class="form-control" type="hidden" th:field="*{nama}" />
+          <!-- Hidden Input alamatGudang -->
+          <input
+            class="form-control"
+            type="hidden"
+            th:field="*{alamatGudang}"
+          />
+          <!-- Iteration Table -->
           <div class="m-4 px-3">
             <table class="table table-bordered">
               <thead>
@@ -67,7 +78,7 @@
                       <!-- Loop available barang as option -->
                       <div th:each="barangExisting : ${listBarangExisting}">
                         <option
-                          th:value="${barangExisting.sku}"
+                          th:value="${barangExisting}"
                           th:text="${barangExisting.merk}"
                         ></option>
                       </div>
@@ -82,9 +93,22 @@
                       th:field="*{listGudangBarang[__${iStat.index}__].stok}"
                     />
                   </td>
+                  <!-- Hidden input gudangId for each GudangBarang in listGudangBarang -->
+                  <input
+                    type="hidden"
+                    th:field="*{listGudangBarang[__${iStat.index}__].gudangId}"
+                    th:value="${gudang}"
+                  />
                 </tr>
               </tbody>
             </table>
+          </div>
+          <!-- Div Buttons -->
+          <div class="d-flex justify-content-center mb-4">
+            <!-- Batal Link -->
+            <a class="btn btn-danger mx-4" href="/">Batal</a>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Simpan</button>
           </div>
         </form>
       </div>

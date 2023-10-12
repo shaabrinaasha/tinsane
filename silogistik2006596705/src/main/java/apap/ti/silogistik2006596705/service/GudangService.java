@@ -14,6 +14,9 @@ public interface GudangService {
     // get list of gudangs from db via jpa
     List<Gudang> getAllGudang();
 
-    // get gudang by id
+    // get gudang by id via jpa
     Gudang getGudangById(Long id);
+
+    // update gudang's List<GudangBarang>
+    void updateGudangList(Gudang gudang);
 }

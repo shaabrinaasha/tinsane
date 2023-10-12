@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import apap.ti.silogistik2006596705.service.BarangService;
 import apap.ti.silogistik2006596705.service.GudangService;
+import jakarta.validation.Valid;
 import apap.ti.silogistik2006596705.DTO.GudangMapper;
 import apap.ti.silogistik2006596705.DTO.UpdateGudangRequestDTO;
 import apap.ti.silogistik2006596705.model.Barang;
@@ -67,7 +69,7 @@ public class GudangController {
         return "restock-gudang";
     }
 
-    // TODO addRow: tambahBarangRow
+    // addRow: tambahBarangRow
     @PostMapping(value = "/gudang/{idGudang}/restock-barang", params = { "tambahBarangRow" })
     public String addRowTambahBarang(
             @PathVariable(value = "idGudang") Long idGudang,
@@ -89,5 +91,26 @@ public class GudangController {
         model.addAttribute("gudangDTO", updateGudangRequestDTO);
 
         return "restock-gudang";
+    }
+
+    // TODO submit restock gudang
+    @PostMapping("/gudang/{idGudang}/restock-barang")
+    public String restockGudang(
+            @PathVariable(value = "idGudang") Long idGudang,
+            @Valid @ModelAttribute UpdateGudangRequestDTO updateGudangRequestDTO,
+            BindingResult validationResult,
+            Model model) {
+        // DTO Validation
+        System.out.println(updateGudangRequestDTO.getListGudangBarang());
+        for (GudangBarang gudangBarang : updateGudangRequestDTO.getListGudangBarang()) {
+            System.out.println(gudangBarang.getGudangId());
+            System.out.println(gudangBarang.getBarangSku());
+        }
+        // Map from DTO to object
+        var gudang = gudangMapper.updateGudangRequestDTOToGudang(updateGudangRequestDTO);
+        // Call service to update object via jpa
+        gudangService.updateGudangList(gudang);
+        // Send variables to be rendered at thyme
+        return "home";
     }
 }

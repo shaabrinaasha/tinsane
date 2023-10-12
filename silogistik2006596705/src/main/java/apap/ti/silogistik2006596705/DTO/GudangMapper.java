@@ -10,4 +10,6 @@ public abstract class GudangMapper {
     public abstract Gudang createGudangRequestDTOToGudang(CreateGudangRequestDTO createGudangRequestDTO);
 
     public abstract UpdateGudangRequestDTO gudangToUpdateGudangRequestDTO(Gudang gudang);
+
+    public abstract Gudang updateGudangRequestDTOToGudang(UpdateGudangRequestDTO updateGudangRequestDTO);
 }
