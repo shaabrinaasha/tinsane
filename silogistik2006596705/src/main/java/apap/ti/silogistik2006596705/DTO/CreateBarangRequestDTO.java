@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CreateBarangRequestDTO {
-    private String sku;
+    // private String sku;
 
     private int tipeBarang;
 

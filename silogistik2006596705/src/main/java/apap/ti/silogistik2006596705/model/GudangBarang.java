@@ -22,7 +22,7 @@ public class GudangBarang {
     // Many to Many with New Entity
 
     // referencing id column dari Gudang (PK -> FK)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_gudang", referencedColumnName = "id")
     private Gudang gudangId;
 

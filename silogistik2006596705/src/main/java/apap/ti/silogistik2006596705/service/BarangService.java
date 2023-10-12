@@ -16,4 +16,10 @@ public interface BarangService {
 
     // get list of barangs via jpa
     List<Barang> getAllBarang();
+
+    // get barang by sku via jpa
+    Barang getBarangBySku(String sku);
+
+    // update barang via jpa with parameter barang
+    Barang updateBarang(Barang barang);
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Ubah Barang</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="d-flex justify-content-center">
+      <div class="card w-75 mt-5">
+        <div class="card-header text-center">
+          <h2>Tambah Barang</h2>
+        </div>
+        <form
+          th:action="@{/barang/{idBarang}/ubah(idBarang=${barangDTO.sku})}"
+          th:object="${barangDTO}"
+          method="POST"
+        >
+          <!-- Input SKU Barang (Disabled) -->
+          <div class="m-4 px-3">
+            <label for="formGroupExampleInput" class="form-label">SKU:</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{sku}"
+              readonly
+            />
+          </div>
+          <!-- Input Merk Barang -->
+          <div class="m-4 px-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Merk Barang:</label
+            >
+            <input type="text" class="form-control" th:field="*{merk}" />
+          </div>
+          <!-- Input Tipe Barang -->
+          <div class="m-4 px-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Tipe Barang:</label
+            >
+            <select class="form-select" th:field="*{tipeBarang}" disabled>
+              <option th:value="1">Produk Elektronik</option>
+              <option th:value="2">Pakaian & Aksesoris</option>
+              <option th:value="3">Makanan & Minuman</option>
+              <option th:value="4">Kosmetik</option>
+              <option th:value="5">Perlengkapan Murah</option>
+            </select>
+          </div>
+          <!-- Input Harga -->
+          <div class="m-4 px-3">
+            <label for="formGroupExampleInput" class="form-label">Harga:</label>
+            <input type="text" class="form-control" th:field="*{hargaBarang}" />
+          </div>
+          <!-- Buttons: Batal & Simpan Inline -->
+          <div class="d-flex justify-content-center px-3 mt-5 mb-3">
+            <a type="button" class="btn btn-danger mx-3" href="/">Batal</a>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

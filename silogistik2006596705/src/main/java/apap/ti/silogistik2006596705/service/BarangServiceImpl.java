@@ -60,4 +60,27 @@ public class BarangServiceImpl implements BarangService {
         return barangDb.findAll();
     }
 
+    @Override
+    public Barang getBarangBySku(String sku) {
+        for (Barang barang : getAllBarang()) {
+            if (barang.getSku().equals(sku)) {
+                return barang;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Barang updateBarang(Barang barangFromDTO) {
+        Barang barang = getBarangBySku(barangFromDTO.getSku());
+
+        if (barang != null) {
+            barang.setMerk(barangFromDTO.getMerk());
+            barang.setHargaBarang(barangFromDTO.getHargaBarang());
+            barangDb.save(barang);
+        }
+
+        return barang;
+    }
+
 }
