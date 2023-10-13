@@ -72,7 +72,7 @@
                   <!-- Select Barang merk -->
                   <td>
                     <select
-                      th:field="*{listGudangBarang[__${iStat.index}__].barangSku.sku}"
+                      th:field="*{listGudangBarang[__${iStat.index}__].barangSku}"
                       class="form-select"
                     >
                       <!-- Loop available barang as option -->
@@ -96,8 +96,8 @@
                   <!-- Hidden input gudangId for each GudangBarang in listGudangBarang -->
                   <input
                     type="hidden"
-                    th:field="*{listGudangBarang[__${iStat.index}__].gudangId.id}"
-                    th:value="${gudang.id}"
+                    th:field="*{listGudangBarang[__${iStat.index}__].gudangId}"
+                    th:value="${gudangDTO.id}"
                   />
                 </tr>
               </tbody>
