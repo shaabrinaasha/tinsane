@@ -46,8 +46,8 @@ public class GudangServiceImpl implements GudangService {
         Gudang gudang = getGudangById(gudangFromDTO.getId());
 
         if (gudang != null) {
-            gudang.setListGudangBarang(gudangFromDTO.getListGudangBarang());
-            gudangDb.save(gudang);
+            gudang.getListGudangBarang().clear();
+            gudangDb.save(gudangFromDTO);
         }
     }
 

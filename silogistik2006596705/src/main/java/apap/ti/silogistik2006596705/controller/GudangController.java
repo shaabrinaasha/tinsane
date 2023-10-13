@@ -61,7 +61,6 @@ public class GudangController {
         var gudangDTO = gudangMapper.gudangToUpdateGudangRequestDTO(gudang);
 
         // Add vars to be rendered at thyme
-        model.addAttribute("gudang", gudang);
         model.addAttribute("gudangDTO", gudangDTO);
         // Send list of existing barangs as option
         List<Barang> listBarangExisting = barangService.getAllBarang();
@@ -106,6 +105,7 @@ public class GudangController {
             System.out.println(gudangBarang.getGudangId());
             System.out.println(gudangBarang.getBarangSku());
         }
+
         // Map from DTO to object
         var gudang = gudangMapper.updateGudangRequestDTOToGudang(updateGudangRequestDTO);
         List<GudangBarang> listFromObject = gudang.getListGudangBarang();
@@ -116,8 +116,23 @@ public class GudangController {
         }
 
         // Call service to update object via jpa
-        gudangService.saveGudang(gudang);
+        // gudangService.saveGudang(gudang);
+        gudangService.updateGudangList(gudang);
         // Send variables to be rendered at thyme
         return "home";
+    }
+
+    // TODO Detail gudang
+    @GetMapping("/gudang/{idGudang}")
+    public String detailGudang(
+            @PathVariable(value = "idGudang") Long idGudang,
+            Model model) {
+
+        // Get gudang by id
+        var gudang = gudangService.getGudangById(idGudang);
+
+        // Kirim ke thyme
+        model.addAttribute("gudang", gudang);
+        return "detail-gudang";
     }
 }

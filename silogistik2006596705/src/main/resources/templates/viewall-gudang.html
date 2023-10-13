@@ -36,7 +36,10 @@
               <td th:text="${gudang.nama}"></td>
               <td th:text="${gudang.alamatGudang}"></td>
               <td class="d-flex justify-content-center">
-                <a type="button" class="btn btn-md btn-primary" href="/"
+                <a
+                  type="button"
+                  class="btn btn-md btn-primary"
+                  th:href="@{/gudang/{idGudang}(idGudang=${gudang.id})}"
                   >Detail</a
                 >
               </td>
