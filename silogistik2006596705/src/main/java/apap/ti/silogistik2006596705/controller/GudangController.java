@@ -108,8 +108,15 @@ public class GudangController {
         }
         // Map from DTO to object
         var gudang = gudangMapper.updateGudangRequestDTOToGudang(updateGudangRequestDTO);
+        List<GudangBarang> listFromObject = gudang.getListGudangBarang();
+        System.out.println(listFromObject);
+        for (GudangBarang gd : listFromObject) {
+            System.out.println(gd.getBarangSku().getSku());
+            System.out.println(gd.getGudangId().getId());
+        }
+
         // Call service to update object via jpa
-        gudangService.updateGudangList(gudang);
+        gudangService.saveGudang(gudang);
         // Send variables to be rendered at thyme
         return "home";
     }
