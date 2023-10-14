@@ -28,4 +28,7 @@ public interface BarangService {
 
     // total stok barang by id (sku)
     int sumStokBySku(String sku);
+
+    // get all barang ordered asc by merk
+    List<Barang> getAllBarangAsc();
 }

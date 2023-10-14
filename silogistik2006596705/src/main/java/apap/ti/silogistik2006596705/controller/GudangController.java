@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import apap.ti.silogistik2006596705.service.BarangService;
+import apap.ti.silogistik2006596705.service.GudangBarangService;
 import apap.ti.silogistik2006596705.service.GudangService;
 import jakarta.validation.Valid;
 import apap.ti.silogistik2006596705.DTO.GudangMapper;
@@ -33,6 +35,9 @@ public class GudangController {
     @Autowired
     private BarangService barangService;
 
+    @Autowired
+    private GudangBarangService gudangBarangService;
+
     // home page
     @GetMapping("/")
     public String home(Model model) {
@@ -50,7 +55,7 @@ public class GudangController {
     // viewall gudang
     @GetMapping("/gudang")
     public String viewAllGudang(Model model) {
-        // TODO gudangService send list of gudangs from jpa
+        // gudangService send list of gudangs from jpa
         List<Gudang> gudangs = gudangService.getAllGudang();
         model.addAttribute("gudangs", gudangs);
         return "viewall-gudang";
@@ -59,7 +64,7 @@ public class GudangController {
     // restock gudang
     @GetMapping("/gudang/{idGudang}/restock-barang")
     public String formRestockGudang(@PathVariable(value = "idGudang") Long idGudang, Model model) {
-        // TODO Get Gudang by id buat diambil datanya to present at form
+        // Get Gudang by id buat diambil datanya to present at form
         var gudang = gudangService.getGudangById(idGudang);
 
         // Set data in DTO (updateGudangRequestDTO)
@@ -97,7 +102,7 @@ public class GudangController {
         return "restock-gudang";
     }
 
-    // TODO submit restock gudang
+    // submit restock gudang
     @PostMapping("/gudang/{idGudang}/restock-barang")
     public String restockGudang(
             @PathVariable(value = "idGudang") Long idGudang,
@@ -127,7 +132,7 @@ public class GudangController {
         return "home";
     }
 
-    // TODO Detail gudang
+    // Detail gudang
     @GetMapping("/gudang/{idGudang}")
     public String detailGudang(
             @PathVariable(value = "idGudang") Long idGudang,
@@ -139,5 +144,27 @@ public class GudangController {
         // Kirim ke thyme
         model.addAttribute("gudang", gudang);
         return "detail-gudang";
+    }
+
+    // TODO Tampilin gudang yang memuat barang tertentu (cari barang)
+    @GetMapping("/gudang/cari-barang")
+    public String formCariBarang(
+            @RequestParam(name = "sku", required = false) String sku,
+            Model model) {
+
+        List<GudangBarang> gudangBarangs = new ArrayList<>();
+        // Get list of GudangBarang from barang with specified sku
+        if (sku != null) {
+            var barang = barangService.getBarangBySku(sku);
+            // This will list all the gudang
+            gudangBarangs = gudangBarangService.findGudangBarangByBarangSku(barang);
+        }
+
+        // Get list of barang yang bisa jadi pilihan di dropdown
+        List<Barang> barangsAsc = barangService.getAllBarangAsc();
+        model.addAttribute("barangs", barangsAsc);
+        model.addAttribute("gudangBarangs", gudangBarangs);
+
+        return "form-cari-barang";
     }
 }

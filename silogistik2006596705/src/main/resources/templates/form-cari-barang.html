@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Cari Barang</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-md-12 m-5 text-center">
+        <h1>Cari Barang</h1>
+      </div>
+      <!-- Form isi iteration select dari list of barangs -->
+      <div class="col-md-5 mb-3">
+        <form class="row" th:action="@{/gudang/cari-barang}" method="GET">
+          <div class="col-md-10">
+            <select class="form-select" id="sku" name="sku">
+              <!-- Iterate option -->
+              <div th:each="barang : ${barangs}">
+                <option
+                  th:value="${barang.sku}"
+                  th:text="${barang.merk}"
+                  th:selected="${barang.sku == param.sku}"
+                ></option>
+              </div>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" type="submit">Cari</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-10">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr class="table-dark">
+              <th scope="col">#</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Alamat Gudang</th>
+              <th scope="col">Stok</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="gudangBarang, iStat: ${gudangBarangs}">
+              <td th:text="${iStat.index + 1}"></td>
+              <td>
+                <a
+                  th:href="@{/gudang/{idGudang}(idGudang = ${gudangBarang.gudangId.id})}"
+                  th:text="${gudangBarang.gudangId.nama}"
+                ></a>
+              </td>
+              <td th:text="${gudangBarang.gudangId.alamatGudang}"></td>
+              <td th:text="${gudangBarang.stok}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -111,4 +111,9 @@ public class BarangServiceImpl implements BarangService {
             return 0;
         }
     }
+
+    @Override
+    public List<Barang> getAllBarangAsc() {
+        return barangDb.findAllByOrderByMerkAsc();
+    }
 }
