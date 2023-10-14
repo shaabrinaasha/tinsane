@@ -38,7 +38,12 @@ public class GudangController {
     public String home(Model model) {
         // count gudang with service
         var gudangCount = gudangService.countGudang();
+        // TODO count barang
+        var barangCount = barangService.countBarang();
+        // TODO count permintaan pengiriman
+        // TODO count karyawan
         model.addAttribute("gudangCount", gudangCount);
+        model.addAttribute("barangCount", barangCount);
         return "home";
     }
 

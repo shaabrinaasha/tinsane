@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import apap.ti.silogistik2006596705.model.Gudang;
+import apap.ti.silogistik2006596705.repository.GudangBarangDb;
 import apap.ti.silogistik2006596705.repository.GudangDb;
 
 @Service
@@ -13,6 +14,9 @@ public class GudangServiceImpl implements GudangService {
     // jpa repo
     @Autowired
     GudangDb gudangDb;
+
+    @Autowired
+    GudangBarangDb gudangBarangDb;
 
     // save gudang via jpa
     @Override
@@ -46,8 +50,12 @@ public class GudangServiceImpl implements GudangService {
         Gudang gudang = getGudangById(gudangFromDTO.getId());
 
         if (gudang != null) {
-            gudang.getListGudangBarang().clear();
-            gudangDb.save(gudangFromDTO);
+            try {
+                gudangBarangDb.deleteByGudangId(gudang);
+                gudangDb.save(gudangFromDTO);
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
     }
 
