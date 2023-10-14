@@ -62,7 +62,12 @@
           </div>
           <!-- Buttons: Batal & Simpan Inline -->
           <div class="d-flex justify-content-center px-3 mt-5 mb-3">
-            <a type="button" class="btn btn-danger mx-3" href="/">Batal</a>
+            <a
+              type="button"
+              class="btn btn-danger mx-3"
+              th:href="@{/barang/{idBarang}(idBarang = ${barangDTO.sku})}"
+              >Batal</a
+            >
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>

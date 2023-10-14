@@ -104,6 +104,11 @@ public class BarangServiceImpl implements BarangService {
 
     @Override
     public int sumStokBySku(String sku) {
-        return barangDb.sumStokBySku(sku);
+        try {
+            return barangDb.sumStokBySku(sku);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
     }
 }

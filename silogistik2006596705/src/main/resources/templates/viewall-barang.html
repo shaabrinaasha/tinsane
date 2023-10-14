@@ -44,7 +44,10 @@
               <td>Stok</td>
               <td th:text="${barang.hargaBarang}"></td>
               <td class="d-flex justify-content-center">
-                <a type="button" class="btn btn-md btn-secondary" href="/"
+                <a
+                  type="button"
+                  class="btn btn-md btn-secondary"
+                  th:href="@{/barang/{idBarang}(idBarang=${barang.sku})}"
                   >Detail</a
                 >
               </td>
