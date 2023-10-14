@@ -83,4 +83,32 @@ public class BarangServiceImpl implements BarangService {
         return barang;
     }
 
+    @Override
+    public String convertTipeBarangToString(int tipeBarang) {
+        String tipeBarangString;
+
+        if (tipeBarang == 1) {
+            tipeBarangString = "Elektronik";
+        } else if (tipeBarang == 2) {
+            tipeBarangString = "Pakaian & Aksesoris";
+        } else if (tipeBarang == 3) {
+            tipeBarangString = "Makanan & Minuman";
+        } else if (tipeBarang == 4) {
+            tipeBarangString = "Kosmetik";
+        } else {
+            tipeBarangString = "Perlengkapan Rumah";
+        }
+
+        return tipeBarangString;
+    }
+
+    @Override
+    public int sumStokBySku(String sku) {
+        try {
+            return barangDb.sumStokBySku(sku);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
+    }
 }
