@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Detail Barang</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="d-flex justify-content-center">
+      <div class="card w-75 mt-5">
+        <div class="card-header">
+          <h2>Detail Barang</h2>
+        </div>
+        <div class="m-4 mb-2 px-3">
+          <p style="display: inline; margin-right: 263px">Merk</p>
+          <p style="display: inline">
+            : <span th:text="${barang.merk}"></span>
+          </p>
+        </div>
+        <div class="m-4 mb-2 px-3">
+          <p style="display: inline; margin-right: 270px">SKU</p>
+          <p style="display: inline">: <span th:text="${barang.sku}"></span></p>
+        </div>
+        <div class="m-4 mb-2 px-3">
+          <p style="display: inline; margin-right: 215px">Tipe Barang</p>
+          <p style="display: inline">
+            : <span th:text="${tipeBarangString}"></span>
+          </p>
+        </div>
+        <div class="m-4 mb-2 px-3">
+          <p style="display: inline; margin-right: 230px">Total Stok</p>
+          <p style="display: inline">: <span th:text="${totalStok}"></span></p>
+        </div>
+        <div class="m-4 px-3">
+          <p style="display: inline; margin-right: 255px">Harga</p>
+          <p style="display: inline">
+            : <span th:text="'Rp' + ${barang.hargaBarang}"></span>
+          </p>
+        </div>
+        <!-- Iteration Table -->
+        <div class="mt-4 mx-4 px-3">
+          <h5 style="font-weight: bold">Daftar barang tersedia</h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">Nama Gudang</th>
+                <th scope="col">Alamat Gudang</th>
+                <th scope="col">Stok</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="gudangBarang, iStat: ${barang.listGudangBarang}">
+                <td th:text="${iStat.index + 1}"></td>
+                <td th:text="${gudangBarang.gudangId.nama}"></td>
+                <td th:text="${gudangBarang.gudangId.alamatGudang}"></td>
+                <td th:text="${gudangBarang.stok}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center m-4 px-3">
+          <a class="btn btn-secondary" href="/barang">Kembali</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

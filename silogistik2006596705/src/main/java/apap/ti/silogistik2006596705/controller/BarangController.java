@@ -9,8 +9,6 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
-import javax.naming.Binding;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +81,7 @@ public class BarangController {
         return "form-ubah-barang";
     }
 
-    // TODO process update barang
+    // process update barang
     @PostMapping("/barang/{idBarang}/ubah")
     public String updateBarang(
             @PathVariable(value = "idBarang") String sku,
@@ -103,5 +101,23 @@ public class BarangController {
         // Add variables to be rendered at thyme
         model.addAttribute("sku", barang.getSku());
         return "success-ubah-barang";
+    }
+
+    // TODO detail barang
+    @GetMapping("/barang/{idBarang}")
+    public String detailBarang(
+            @PathVariable(value = "idBarang") String sku,
+            Model model) {
+        // Get barang by id buat tampilin datanya
+        var barang = barangService.getBarangBySku(sku);
+        // barangService bantu convert tipeBarang (int) jadi String
+        var tipeBarangString = barangService.convertTipeBarangToString(barang.getTipeBarang());
+        // TODO barangService totalStok
+        var totalStok = barangService.sumStokBySku(sku);
+        // Add to thyme
+        model.addAttribute("barang", barang);
+        model.addAttribute("tipeBarangString", tipeBarangString);
+        model.addAttribute("totalStok", totalStok);
+        return "detail-barang";
     }
 }
