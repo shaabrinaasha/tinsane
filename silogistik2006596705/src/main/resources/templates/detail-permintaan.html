@@ -22,7 +22,11 @@
             Detail Permintaan Pengiriman
           </h3>
           <div class="">
-            <a class="btn btn-danger" th:href="@{/}">Cancel Permintaan</a>
+            <a
+              class="btn btn-danger"
+              th:href="@{/permintaan-pengiriman/{idPermintaanPengiriman}/cancel(idPermintaanPengiriman=${permintaan.idPengiriman})}"
+              >Cancel Permintaan</a
+            >
           </div>
         </div>
         <div class="mt-4 mx-4 px-3">
@@ -38,9 +42,6 @@
               <p>Biaya Pengiriman</p>
             </div>
             <div class="col-md-6">
-              <!-- <h2
-            th:text="'Barang dengan SKU ' + ${sku} + ' berhasil ditambahkan.'"
-          ></h2> -->
               <p th:text="': '+${permintaan.nomorPengiriman}"></p>
               <p th:text="': '+${permintaan.waktuPermintaan}"></p>
               <p th:text="': '+${permintaan.karyawanId.nama}"></p>
