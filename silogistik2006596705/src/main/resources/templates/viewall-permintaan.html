@@ -10,18 +10,21 @@
     <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
     <!-- Add Fragment: js -->
     <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
-    <title>View All Barang</title>
+    <title>View All Permintaan Pengiriman</title>
   </head>
   <body>
     <!-- Add Fragment: nav -->
     <nav th:insert="~{fragments/navbar :: navbar}"></nav>
     <div class="row d-flex justify-content-center mt-3">
       <div class="col-md-12 mt-5 text-center">
-        <h1>Daftar Barang</h1>
+        <h1>Daftar Permintaan Pengiriman</h1>
       </div>
       <div class="col-md-12 d-flex justify-content-center mt-3 mb-5">
-        <a type="button" class="btn btn-md btn-primary" href="/barang/tambah"
-          >+ Tambah Barang</a
+        <a
+          type="button"
+          class="btn btn-md btn-primary"
+          href="/permintaan-pengiriman/tambah"
+          >+ Tambah Permintaan Pengiriman</a
         >
       </div>
       <div class="col-md-10">
@@ -29,10 +32,11 @@
           <thead>
             <tr class="table-dark">
               <th scope="col">#</th>
-              <th scope="col">SKU</th>
-              <th scope="col">Merk</th>
-              <th scope="col">Stok</th>
-              <th scope="col">Harga</th>
+              <th scope="col">Waktu Permintaan</th>
+              <th scope="col">Nomor Pengiriman</th>
+              <th scope="col">Nama Penerima</th>
+              <th scope="col">Alamat Penerima</th>
+              <th scope="col">Tanggal Pengiriman</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -41,12 +45,7 @@
               <td th:text="${iStat.index + 1}"></td>
               <td th:text="${barang.sku}"></td>
               <td th:text="${barang.merk}"></td>
-              <div th:each="stok, iStatStok : ${stokEachList}">
-                <td
-                  th:if="${iStat.index == iStatStok.index}"
-                  th:text="${stok}"
-                ></td>
-              </div>
+              <td>Stok</td>
               <td th:text="${barang.hargaBarang}"></td>
               <td class="d-flex justify-content-center">
                 <a

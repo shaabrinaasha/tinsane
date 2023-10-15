@@ -30,6 +30,13 @@ public class BarangController {
     @GetMapping("/barang")
     public String viewAllBarang(Model model) {
         List<Barang> barangs = barangService.getAllBarang();
+
+        // Get list of stok each if barangs not empty
+        if (barangs != null) {
+            List<Integer> stokEachList = barangService.getStokEachList(barangs);
+            model.addAttribute("stokEachList", stokEachList);
+        }
+
         model.addAttribute("barangs", barangs);
         return "viewall-barang";
     }

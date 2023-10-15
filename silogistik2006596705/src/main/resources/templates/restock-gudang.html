@@ -96,8 +96,9 @@
                   <!-- Hidden input gudangId for each GudangBarang in listGudangBarang -->
                   <input
                     type="hidden"
-                    th:field="*{listGudangBarang[__${iStat.index}__].gudangId}"
-                    th:value="${gudangDTO.id}"
+                    th:id="listGudangBarang[__${iStat.index}__].gudangId"
+                    th:name="listGudangBarang[__${iStat.index}__].gudangId"
+                    th:value="${gudang.id}"
                   />
                 </tr>
               </tbody>

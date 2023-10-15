@@ -31,4 +31,7 @@ public interface BarangService {
 
     // get all barang ordered asc by merk
     List<Barang> getAllBarangAsc();
+
+    // get list of stok from list of barangs
+    List<Integer> getStokEachList(List<Barang> barangs);
 }

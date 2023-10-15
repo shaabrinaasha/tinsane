@@ -1,5 +1,6 @@
 package apap.ti.silogistik2006596705.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,5 +116,17 @@ public class BarangServiceImpl implements BarangService {
     @Override
     public List<Barang> getAllBarangAsc() {
         return barangDb.findAllByOrderByMerkAsc();
+    }
+
+    @Override
+    public List<Integer> getStokEachList(List<Barang> barangs) {
+        List<Integer> stokEachList = new ArrayList<>();
+
+        for (Barang barang : barangs) {
+            var sumStokBySku = sumStokBySku(barang.getSku());
+            stokEachList.add(sumStokBySku);
+        }
+
+        return stokEachList;
     }
 }

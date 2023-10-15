@@ -72,9 +72,12 @@ public class GudangController {
 
         // Add vars to be rendered at thyme
         model.addAttribute("gudangDTO", gudangDTO);
+        System.out.println(gudangDTO.getId());
         // Send list of existing barangs as option
         List<Barang> listBarangExisting = barangService.getAllBarang();
         model.addAttribute("listBarangExisting", listBarangExisting);
+        model.addAttribute("gudang", gudangService.getGudangById(idGudang));
+
         return "restock-gudang";
     }
 
@@ -122,6 +125,9 @@ public class GudangController {
 
         // Map from DTO to object
         var gudang = gudangMapper.updateGudangRequestDTOToGudang(updateGudangRequestDTO);
+
+        // update gudang list
+
         List<GudangBarang> listFromObject = gudang.getListGudangBarang();
         System.out.println(listFromObject);
         for (GudangBarang gd : listFromObject) {
