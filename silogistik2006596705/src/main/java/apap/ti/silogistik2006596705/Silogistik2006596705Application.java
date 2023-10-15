@@ -11,6 +11,8 @@ import apap.ti.silogistik2006596705.DTO.KaryawanMapper;
 import apap.ti.silogistik2006596705.service.GudangService;
 import apap.ti.silogistik2006596705.service.KaryawanService;
 import apap.ti.silogistik2006596705.DTO.CreateGudangRequestDTO;
+import apap.ti.silogistik2006596705.DTO.CreateKaryawanRequestDTO;
+import apap.ti.silogistik2006596705.DTO.CreateBarangRequestDTO;
 import jakarta.transaction.Transactional;
 
 import java.util.Locale;
@@ -39,8 +41,17 @@ public class Silogistik2006596705Application {
 			gudangService.saveGudang(gudang);
 
 			// Create KaryawanDTO to be filled with data from javafaker
+			var karyawanDTO = new CreateKaryawanRequestDTO();
+			karyawanDTO.setNama(faker.name().fullName());
+			karyawanDTO.setTanggalLahir(faker.date().birthday());
+			// https://stackoverflow.com/questions/21246696/generating-a-number-between-1-and-2-java-math-random
+			int gender = (int) (Math.random() * 2 + 1);
+			// System.out.println(gender);
+			karyawanDTO.setJenisKelamin(gender);
 
-			// Map KaryawanDTO to be
+			// Map KaryawanDTO to Karyawan to be saved via service via jpa
+			var karyawan = karyawanMapper.createKaryawanRequestDTOToKaryawan(karyawanDTO);
+			karyawanService.saveKaryawan(karyawan);
 		};
 	}
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Buat Permintaan Pengiriman</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="d-flex justify-content-center">
+      <div class="row d-flex justify-content-center w-75 mt-5">
+        <div class="card-header text-center">
+          <h2>Buat Permintaan Pengiriman</h2>
+        </div>
+        <!-- Form -->
+        <form class="row gy-2" action="">
+          <div class="col-md-6">
+            <!-- Iterable: Dropdown Karyawan -->
+            <label class="form-label">Karyawan Bertugas:</label>
+            <select class="form-select">
+              <div th:each="karyawan : ${karyawans}">
+                <option th:text="${karyawan.nama}"></option>
+              </div>
+            </select>
+            <!-- Nama Penerima -->
+            <label class="form-label mt-3">Nama Penerima:</label>
+            <input class="form-select" type="text" />
+            <!-- Alamat Penerima -->
+            <label class="form-label mt-3">Alamat Penerima:</label>
+            <input class="form-select" type="text" />
+          </div>
+          <div class="col-md-6">
+            <!-- Tanggal Pengiriman -->
+            <label class="form-label">Tanggal Pengiriman:</label>
+            <input class="form-control" type="date" />
+            <!-- Jenis Layanan -->
+            <label class="form-label mt-3">Jenis Layanan:</label>
+            <select class="form-select">
+              <option value="1">Same Day</option>
+              <option value="2">Kilat</option>
+              <option value="3">Reguler</option>
+              <option value="4">Hemat</option>
+            </select>
+            <!-- Biaya Pengiriman -->
+            <label class="form-label mt-3">Biaya Pengiriman:</label>
+            <input class="form-control" type="text" />
+          </div>
+          <!-- Button Tambah Barang -->
+          <div class="col-md-12 mt-4">
+            <div class="d-flex flex-row-reverse">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                name="tambahBarangRow"
+              >
+                + Tambah Barang
+              </button>
+            </div>
+          </div>
+          <!-- Iteration Table -->
+          <div class="col-md-12 mt-4">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="table-dark">
+                  <th scope="col">#</th>
+                  <th scope="col">Barang</th>
+                  <th scope="col">Kuantitas</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <!-- Div Buttons -->
+          <div class="d-flex justify-content-center mb-4">
+            <!-- Batal Link -->
+            <a class="btn btn-danger mx-4" href="/">Batal</a>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

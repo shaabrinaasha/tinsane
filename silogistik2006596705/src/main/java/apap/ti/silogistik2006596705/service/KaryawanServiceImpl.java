@@ -1,5 +1,7 @@
 package apap.ti.silogistik2006596705.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class KaryawanServiceImpl implements KaryawanService {
     @Override
     public void saveKaryawan(Karyawan karyawan) {
         karyawanDb.save(karyawan);
+    }
+
+    @Override
+    public List<Karyawan> getAllKaryawan() {
+        return karyawanDb.findAll();
     }
 
 }

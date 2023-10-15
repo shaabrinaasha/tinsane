@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,8 +20,8 @@ import java.util.Date;
 public class Karyawan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "bigint(20)")
-    private Long id;
+    @Column(name = "id_karyawan")
+    private Long idKaryawan;
 
     @NotNull
     @Column(name = "nama", nullable = false)
@@ -32,4 +34,7 @@ public class Karyawan {
     @NotNull
     @Temporal(TemporalType.DATE)
     private Date tanggalLahir;
+
+    @OneToMany(mappedBy = "karyawanId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PermintaanPengiriman> listPermintaanPengiriman = new ArrayList<>();
 }
