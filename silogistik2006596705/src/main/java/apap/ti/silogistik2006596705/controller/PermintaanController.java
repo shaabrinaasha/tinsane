@@ -161,6 +161,6 @@ public class PermintaanController {
             @PathVariable(value = "idPermintaanPengiriman") Long idPermintaanPengiriman,
             Model model) {
         // TODO if delete berhasil then return success else fail page
-        return "success-create-permintaan";
+        return "success-cancel-permintaan";
     }
 }
