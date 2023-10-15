@@ -17,6 +17,7 @@ import apap.ti.silogistik2006596705.DTO.CreatePermintaanDTO;
 import apap.ti.silogistik2006596705.DTO.PermintaanPengirimanMapper;
 import apap.ti.silogistik2006596705.model.Barang;
 import apap.ti.silogistik2006596705.model.Karyawan;
+import apap.ti.silogistik2006596705.model.PermintaanPengiriman;
 import apap.ti.silogistik2006596705.model.PermintaanPengirimanBarang;
 import apap.ti.silogistik2006596705.service.BarangService;
 import apap.ti.silogistik2006596705.service.KaryawanService;
@@ -37,7 +38,7 @@ public class PermintaanController {
     @Autowired
     PermintaanPengirimanMapper permintaanPengirimanMapper;
 
-    // TODO Tampilin form tambah permintaan pengiriman
+    // Tampilin form tambah permintaan pengiriman
     @GetMapping("/permintaan-pengiriman/tambah")
     public String formTambahPermintaan(Model model) {
         // TODO Kirim permintaanDTO untuk diisi at form
@@ -51,7 +52,7 @@ public class PermintaanController {
         return "form-create-permintaan";
     }
 
-    // TODO addRow Barang at tambah permintaan
+    // addRow Barang at tambah permintaan
     @PostMapping(value = "/permintaan-pengiriman/tambah", params = { "tambahBarangRow" })
     public String addRowTambahPermintaan(
             @ModelAttribute CreatePermintaanDTO permintaanDTO,
@@ -80,7 +81,7 @@ public class PermintaanController {
         return "form-create-permintaan";
     }
 
-    // TODO Process tambah permintaan
+    // Process tambah permintaan
     @PostMapping("/permintaan-pengiriman/tambah")
     public String tambahPermintaan(
             @ModelAttribute CreatePermintaanDTO permintaanDTO,
@@ -124,5 +125,15 @@ public class PermintaanController {
         // Var for thyme
         model.addAttribute("nomorPengiriman", generatedNomorPermintaan);
         return "success-create-permintaan";
+    }
+
+    // TODO View all permintaan
+    @GetMapping("/permintaan-pengiriman")
+    public String viewAllPermintaan(Model model) {
+        // get all permintaan via service via jpa
+        List<PermintaanPengiriman> listPermintaan = permintaanPengirimanService.getAllNotCancelledPermintaan();
+        model.addAttribute("listPermintaan", listPermintaan);
+
+        return "viewall-permintaan";
     }
 }

@@ -72,4 +72,9 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
         permintaanPengirimanDb.save(permintaanPengiriman);
     }
 
+    @Override
+    public List<PermintaanPengiriman> getAllNotCancelledPermintaan() {
+        return permintaanPengirimanDb.findByIsCancelledFalse();
+    }
+
 }

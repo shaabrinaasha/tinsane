@@ -41,17 +41,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="barang, iStat: ${barangs}">
+            <tr th:each="permintaan, iStat: ${listPermintaan}">
               <td th:text="${iStat.index + 1}"></td>
-              <td th:text="${barang.sku}"></td>
-              <td th:text="${barang.merk}"></td>
-              <td>Stok</td>
-              <td th:text="${barang.hargaBarang}"></td>
+              <td th:text="${permintaan.waktuPermintaan}"></td>
+              <td th:text="${permintaan.nomorPengiriman}"></td>
+              <td th:text="${permintaan.namaPenerima}"></td>
+              <td th:text="${permintaan.alamatPenerima}"></td>
+              <td th:text="${permintaan.tanggalPengiriman}"></td>
               <td class="d-flex justify-content-center">
                 <a
                   type="button"
                   class="btn btn-md btn-secondary"
-                  th:href="@{/barang/{idBarang}(idBarang=${barang.sku})}"
+                  th:href="@{/permintaan-pengiriman/{idPermintaanPengiriman}(idPermintaanPengiriman=${permintaan.idPengiriman})}"
                   >Detail</a
                 >
               </td>
