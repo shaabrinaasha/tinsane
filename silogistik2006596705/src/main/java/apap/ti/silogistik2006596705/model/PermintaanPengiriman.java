@@ -26,7 +26,7 @@ public class PermintaanPengiriman {
 
     @NotNull
     @Column(name = "nomor_pengiriman")
-    private String nomor_pengiriman;
+    private String nomorPengiriman;
 
     @NotNull
     @Column(name = "is_cancelled")
@@ -62,4 +62,13 @@ public class PermintaanPengiriman {
 
     @OneToMany(mappedBy = "permintaanPengirimanId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "PermintaanPengiriman [idPengiriman=" + idPengiriman + ", nomorPengiriman=" + nomorPengiriman
+                + ", isCancelled=" + isCancelled + ", namaPenerima=" + namaPenerima + ", alamatPenerima="
+                + alamatPenerima + ", tanggalPengiriman=" + tanggalPengiriman + ", biayaPengiriman=" + biayaPengiriman
+                + ", jenisLayanan=" + jenisLayanan + ", waktuPermintaan=" + waktuPermintaan + ", karyawanId="
+                + karyawanId + ", listPermintaanPengirimanBarang=" + listPermintaanPengirimanBarang + "]";
+    }
 }

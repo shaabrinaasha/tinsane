@@ -109,12 +109,20 @@ public class PermintaanController {
 
         // Map permintaanDTO to Permintaan
         var permintaan = permintaanPengirimanMapper.createPermintaanDTOToPermintaan(permintaanDTO);
+
         // Generate permintaan id via service
         var generatedNomorPermintaan = permintaanPengirimanService.generateNomorPengiriman(permintaan);
-        System.out.println(generatedNomorPermintaan);
-        // Set Permintaan id
-        // Save Permintaan via jpa
+        // System.out.println(generatedNomorPermintaan);
 
+        // Set Permintaan id
+        permintaan.setNomorPengiriman(generatedNomorPermintaan);
+
+        // Save Permintaan via jpa
+        permintaanPengirimanService.savePermintaanPengiriman(permintaan);
+        // System.out.println(permintaan.toString());
+
+        // Var for thyme
+        model.addAttribute("nomorPengiriman", generatedNomorPermintaan);
         return "success-create-permintaan";
     }
 }
