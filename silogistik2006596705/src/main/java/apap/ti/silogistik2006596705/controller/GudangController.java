@@ -153,7 +153,8 @@ public class GudangController {
         // gudangService.saveGudang(gudang);
         gudangService.updateGudangList(gudang);
         // Send variables to be rendered at thyme
-        return "home";
+        model.addAttribute("idGudang", gudang.getId());
+        return "success-restock-gudang";
     }
 
     // Detail gudang

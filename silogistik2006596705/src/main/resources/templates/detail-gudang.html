@@ -17,8 +17,13 @@
     <nav th:insert="~{fragments/navbar :: navbar}"></nav>
     <div class="d-flex justify-content-center">
       <div class="card w-75 mt-5">
-        <div class="card-header text-center">
-          <h2>Detail Gudang</h2>
+        <div class="card-header d-flex justify-content-between">
+          <h3 style="display: inline; margin-bottom: 0">Detail Gudang</h3>
+          <a
+            class="btn btn-primary"
+            th:href="@{/gudang/{idGudang}/restock-barang(idGudang=${gudang.id})}"
+            >+ Restock Barang</a
+          >
         </div>
         <div class="m-4 mb-2 px-3">
           <p style="display: inline; margin-right: 275px">Nama Gudang</p>
@@ -48,7 +53,12 @@
             <tbody>
               <tr th:each="gudangBarang, iStat: ${gudang.listGudangBarang}">
                 <td th:text="${iStat.index + 1}"></td>
-                <td th:text="${gudangBarang.barangSku.sku}"></td>
+                <td>
+                  <a
+                    th:href="@{/barang/{sku}(sku=${gudangBarang.barangSku.sku})}"
+                    th:text="${gudangBarang.barangSku.sku}"
+                  ></a>
+                </td>
                 <td th:text="${gudangBarang.barangSku.merk}"></td>
                 <td th:text="${gudangBarang.stok}"></td>
                 <td th:text="${gudangBarang.barangSku.hargaBarang}"></td>

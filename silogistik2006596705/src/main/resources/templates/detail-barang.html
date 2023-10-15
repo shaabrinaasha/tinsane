@@ -68,7 +68,12 @@
             <tbody>
               <tr th:each="gudangBarang, iStat: ${barang.listGudangBarang}">
                 <td th:text="${iStat.index + 1}"></td>
-                <td th:text="${gudangBarang.gudangId.nama}"></td>
+                <td>
+                  <a
+                    th:href="@{/gudang/{idGudang}(idGudang=${gudangBarang.gudangId.id})}"
+                    th:text="${gudangBarang.gudangId.nama}"
+                  ></a>
+                </td>
                 <td th:text="${gudangBarang.gudangId.alamatGudang}"></td>
                 <td th:text="${gudangBarang.stok}"></td>
               </tr>

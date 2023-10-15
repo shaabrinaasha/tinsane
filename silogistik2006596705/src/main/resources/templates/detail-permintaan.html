@@ -70,7 +70,12 @@
                 th:each="ppb, iStat: ${permintaan.listPermintaanPengirimanBarang}"
               >
                 <td th:text="${iStat.index + 1}"></td>
-                <td th:text="${ppb.barangSkuRef.sku}"></td>
+                <td>
+                  <a
+                    th:href="@{/barang/{sku}(sku=${ppb.barangSkuRef.sku})}"
+                    th:text="${ppb.barangSkuRef.sku}"
+                  ></a>
+                </td>
                 <td th:text="${ppb.barangSkuRef.merk}"></td>
                 <td th:text="${ppb.kuantitasPesanan}"></td>
                 <td th:text="'Rp'+ ${ppb.barangSkuRef.hargaBarang}"></td>

@@ -107,7 +107,11 @@
           <!-- Div Buttons -->
           <div class="d-flex justify-content-center mb-4">
             <!-- Batal Link -->
-            <a class="btn btn-danger mx-4" href="/">Batal</a>
+            <a
+              class="btn btn-danger mx-4"
+              th:href="@{/gudang/{idGudang}(idGudang=${gudang.id})}"
+              >Batal</a
+            >
             <!-- Submit Button -->
             <button class="btn btn-primary" type="submit">Simpan</button>
           </div>
