@@ -67,8 +67,6 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
 
     @Override
     public void savePermintaanPengiriman(PermintaanPengiriman permintaanPengiriman) {
-        // Set isCancelled to false first
-        permintaanPengiriman.setIsCancelled(false);
         permintaanPengirimanDb.save(permintaanPengiriman);
     }
 
@@ -90,6 +88,25 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
     @Override
     public List<PermintaanPengiriman> getAllPermintaan() {
         return permintaanPengirimanDb.findAll();
+    }
+
+    @Override
+    public void cancelByid(Long idPengiriman) throws Exception {
+        // Get permintaan pengiriman by id
+        var pengiriman = getPengirimanById(idPengiriman);
+
+        // Check if its under 24 hours
+        // https://www.geeksforgeeks.org/find-the-duration-of-difference-between-two-dates-in-java/
+        LocalDateTime waktuNow = LocalDateTime.now();
+        int diff = waktuNow.getHour() - pengiriman.getWaktuPermintaan().getHour();
+
+        if (diff > 24) {
+            throw new Exception("Permintaan Pengiriman lebih dari 24 jam tidak bisa di-cancel");
+        }
+        System.out.println(diff);
+
+        // If still under 24 hour, soft delete via jpa
+        permintaanPengirimanDb.deleteById(idPengiriman);
     }
 
 }

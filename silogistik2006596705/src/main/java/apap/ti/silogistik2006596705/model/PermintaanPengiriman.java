@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,12 +15,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// Soft Delete: https://www.baeldung.com/spring-jpa-soft-delete
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "permintaan_pengiriman")
+@SQLDelete(sql = "UPDATE permintaan_pengiriman SET is_cancelled = true WHERE id_pengiriman=?")
+@Where(clause = "is_cancelled = false")
 public class PermintaanPengiriman {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +36,7 @@ public class PermintaanPengiriman {
 
     @NotNull
     @Column(name = "is_cancelled")
-    private Boolean isCancelled;
+    private Boolean isCancelled = Boolean.FALSE;
 
     @NotNull
     @Column(name = "nama_penerima")

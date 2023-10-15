@@ -19,4 +19,7 @@ public interface PermintaanPengirimanService {
 
     // get all permintaan
     List<PermintaanPengiriman> getAllPermintaan();
+
+    // cancel if its < 24 hours from now
+    void cancelByid(Long idPengiriman) throws Exception;
 }

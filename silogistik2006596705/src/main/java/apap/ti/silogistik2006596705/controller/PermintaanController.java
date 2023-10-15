@@ -161,6 +161,16 @@ public class PermintaanController {
             @PathVariable(value = "idPermintaanPengiriman") Long idPermintaanPengiriman,
             Model model) {
         // TODO if delete berhasil then return success else fail page
+        try {
+            permintaanPengirimanService.cancelByid(idPermintaanPengiriman);
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "error-cancel-permintaan";
+        }
+
+        // get permintaan pengiriman by id
+        var permintaan = permintaanPengirimanService.getPengirimanById(idPermintaanPengiriman);
+        model.addAttribute("nomorPengiriman", permintaan.getNomorPengiriman());
         return "success-cancel-permintaan";
     }
 }

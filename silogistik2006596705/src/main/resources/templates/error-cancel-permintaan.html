@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Success Cancel Permintaan</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="container">
+      <div class="card m-4 p-4">
+        <div class="text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="red"
+            class="bi bi-x-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+            />
+          </svg>
+          <h2 th:text="${errorMsg}"></h2>
+        </div>
+        <div class="text-center m-3">
+          <a
+            type="button"
+            class="btn btn-md btn-primary"
+            href="/permintaan-pengiriman"
+            >Lihat Semua Permintaan</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
