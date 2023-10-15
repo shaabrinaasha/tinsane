@@ -154,4 +154,13 @@ public class PermintaanController {
         model.addAttribute("permintaan", permintaan);
         return "detail-permintaan";
     }
+
+    // TODO Soft delete yang under 24 hours only
+    @GetMapping("/permintaan-pengiriman/{idPermintaanPengiriman}/cancel")
+    public String cancelPermintaan(
+            @PathVariable(value = "idPermintaanPengiriman") Long idPermintaanPengiriman,
+            Model model) {
+        // TODO if delete berhasil then return success else fail page
+        return "success-create-permintaan";
+    }
 }
