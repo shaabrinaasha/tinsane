@@ -91,7 +91,7 @@ public class BarangController {
         // DTO Validation
         if (validationResult.hasErrors()) {
             model.addAttribute("errorMessage", validationResult.getAllErrors());
-            return "error-validation-edit";
+            return "error-validation";
         }
 
         // Map DTO to object

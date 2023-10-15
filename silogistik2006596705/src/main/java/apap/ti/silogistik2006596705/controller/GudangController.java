@@ -110,6 +110,10 @@ public class GudangController {
             BindingResult validationResult,
             Model model) {
         // DTO Validation
+        if (validationResult.hasErrors()) {
+            model.addAttribute("errorMessage", validationResult.getAllErrors());
+            return "error-validation";
+        }
         System.out.println(updateGudangRequestDTO.getListGudangBarang());
         for (GudangBarang gudangBarang : updateGudangRequestDTO.getListGudangBarang()) {
             System.out.println(gudangBarang.getGudangId());

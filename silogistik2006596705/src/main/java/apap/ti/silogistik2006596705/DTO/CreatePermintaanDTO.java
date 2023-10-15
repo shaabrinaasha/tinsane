@@ -5,7 +5,6 @@ import java.util.List;
 
 import apap.ti.silogistik2006596705.model.Karyawan;
 import apap.ti.silogistik2006596705.model.PermintaanPengirimanBarang;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,22 +13,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CreatePermintaanDTO {
-    @NotBlank
     String namaPenerima;
 
-    @NotBlank
     String alamatPenerima;
 
-    @NotBlank
     Date tanggalPengiriman;
 
     int jenisLayanan;
 
-    @Positive
     int biayaPengiriman;
 
-    @NotBlank
     Karyawan karyawanId;
 
     List<PermintaanPengirimanBarang> listPermintaanPengirimanBarang;
+
+    // Masukkin date dari form ke string dulu
+    String tanggalPengirimanString;
+
+    // toString method buat check isi
+    @Override
+    public String toString() {
+        return "CreatePermintaanDTO [namaPenerima=" + namaPenerima + ", alamatPenerima=" + alamatPenerima
+                + ", jenisLayanan=" + jenisLayanan + ", biayaPengiriman=" + biayaPengiriman + ", karyawan="
+                + karyawanId.getIdKaryawan() + ", listPermintaanPengirimanBarang=" + listPermintaanPengirimanBarang
+                + ", tanggalPengirimanString=" + tanggalPengirimanString + "]";
+    }
 }

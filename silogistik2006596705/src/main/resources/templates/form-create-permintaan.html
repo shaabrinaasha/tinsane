@@ -21,29 +21,54 @@
           <h2>Buat Permintaan Pengiriman</h2>
         </div>
         <!-- Form -->
-        <form class="row gy-2" action="">
+        <form
+          class="row gy-2"
+          th:action="@{/permintaan-pengiriman/tambah}"
+          th:object="${permintaanDTO}"
+          method="POST"
+        >
           <div class="col-md-6">
             <!-- Iterable: Dropdown Karyawan -->
             <label class="form-label">Karyawan Bertugas:</label>
-            <select class="form-select">
+            <select class="form-select" th:field="*{karyawanId}">
               <div th:each="karyawan : ${karyawans}">
-                <option th:text="${karyawan.nama}"></option>
+                <option
+                  th:field="*{karyawanId}"
+                  th:value="${karyawan.idKaryawan}"
+                  th:text="${karyawan.nama}"
+                  th:selected="${karyawan == karyawanId}"
+                ></option>
               </div>
             </select>
             <!-- Nama Penerima -->
             <label class="form-label mt-3">Nama Penerima:</label>
-            <input class="form-select" type="text" />
+            <input
+              class="form-select"
+              type="text"
+              th:field="*{namaPenerima}"
+              required
+            />
             <!-- Alamat Penerima -->
             <label class="form-label mt-3">Alamat Penerima:</label>
-            <input class="form-select" type="text" />
+            <input
+              class="form-select"
+              type="text"
+              th:field="*{alamatPenerima}"
+              required
+            />
           </div>
           <div class="col-md-6">
             <!-- Tanggal Pengiriman -->
             <label class="form-label">Tanggal Pengiriman:</label>
-            <input class="form-control" type="date" />
+            <input
+              class="form-control"
+              type="date"
+              th:field="*{tanggalPengirimanString}"
+              required
+            />
             <!-- Jenis Layanan -->
             <label class="form-label mt-3">Jenis Layanan:</label>
-            <select class="form-select">
+            <select class="form-select" th:field="*{jenisLayanan}">
               <option value="1">Same Day</option>
               <option value="2">Kilat</option>
               <option value="3">Reguler</option>
@@ -51,7 +76,12 @@
             </select>
             <!-- Biaya Pengiriman -->
             <label class="form-label mt-3">Biaya Pengiriman:</label>
-            <input class="form-control" type="text" />
+            <input
+              class="form-control"
+              type="text"
+              th:field="*{biayaPengiriman}"
+              required
+            />
           </div>
           <!-- Button Tambah Barang -->
           <div class="col-md-12 mt-4">
@@ -75,6 +105,35 @@
                   <th scope="col">Kuantitas</th>
                 </tr>
               </thead>
+              <tbody>
+                <!-- Tiap row kita iterate PPB from listPPB -->
+                <tr th:each="ppb, iStat : *{listPermintaanPengirimanBarang}">
+                  <td th:text="${iStat.index + 1}"></td>
+                  <!-- Pilih barang from list of existing barang -->
+                  <td>
+                    <select
+                      class="form-select"
+                      th:field="*{listPermintaanPengirimanBarang[__${iStat.index}__].barangSkuRef}"
+                    >
+                      <div th:each="barang : ${barangs}">
+                        <option
+                          th:value="${barang.sku}"
+                          th:text="${barang.merk}"
+                        ></option>
+                      </div>
+                    </select>
+                  </td>
+                  <!-- Input Kuantitas -->
+                  <td>
+                    <input
+                      class="form-control"
+                      type="text"
+                      th:field="*{listPermintaanPengirimanBarang[__${iStat.index}__].kuantitasPesanan}"
+                      required
+                    />
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <!-- Div Buttons -->

@@ -10,9 +10,8 @@
     <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
     <!-- Add Fragment: js -->
     <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
-    <title>Success Create Barang</title>
+    <title>Success Create Permintaan</title>
   </head>
-
   <body>
     <!-- Add Fragment: nav -->
     <nav th:insert="~{fragments/navbar :: navbar}"></nav>
@@ -20,7 +19,7 @@
       <div class="card m-4 p-4">
         <div class="text-center">
           <h2
-            th:text="'Barang dengan SKU ' + ${sku} + ' berhasil ditambahkan.'"
+            th:text="'Permintaan dengan nomor pengiriman ' + ${nomorPengiriman} + ' berhasil ditambahkan.'"
           ></h2>
         </div>
         <div class="text-center m-3">
