@@ -10,4 +10,7 @@ public interface KaryawanService {
 
     // get all karyawan
     List<Karyawan> getAllKaryawan();
+
+    // count karyawan
+    Long countKaryawan();
 }

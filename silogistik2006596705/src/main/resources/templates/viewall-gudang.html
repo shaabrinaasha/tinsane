@@ -21,7 +21,7 @@
         <h1>Daftar Gudang</h1>
       </div>
       <div class="col-md-10">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="tableGudang">
           <thead class="text-center">
             <tr class="table-dark">
               <th scope="col">#</th>
@@ -48,5 +48,14 @@
         </table>
       </div>
     </div>
+    <!-- DataTables -->
+    <script>
+      $(document).ready(function () {
+        $("#tableGudang").DataTable({
+          lengthMenu: [5, 10, 20],
+          columnDefs: [{ targets: [3], sortable: false }],
+        });
+      });
+    </script>
   </body>
 </html>

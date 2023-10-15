@@ -22,4 +22,7 @@ public interface PermintaanPengirimanService {
 
     // cancel if its < 24 hours from now
     void cancelByid(Long idPengiriman) throws Exception;
+
+    // count permintaan pengiriman
+    Long countPermintaanPengiriman();
 }

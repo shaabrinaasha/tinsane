@@ -24,4 +24,9 @@ public class KaryawanServiceImpl implements KaryawanService {
         return karyawanDb.findAll();
     }
 
+    @Override
+    public Long countKaryawan() {
+        return karyawanDb.count();
+    }
+
 }

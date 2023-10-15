@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import apap.ti.silogistik2006596705.service.BarangService;
 import apap.ti.silogistik2006596705.service.GudangBarangService;
 import apap.ti.silogistik2006596705.service.GudangService;
+import apap.ti.silogistik2006596705.service.KaryawanService;
+import apap.ti.silogistik2006596705.service.PermintaanPengirimanService;
 import jakarta.validation.Valid;
 import apap.ti.silogistik2006596705.DTO.GudangMapper;
 import apap.ti.silogistik2006596705.DTO.UpdateGudangRequestDTO;
@@ -38,17 +40,29 @@ public class GudangController {
     @Autowired
     private GudangBarangService gudangBarangService;
 
+    @Autowired
+    private PermintaanPengirimanService permintaanPengirimanService;
+
+    @Autowired
+    private KaryawanService karyawanService;
+
     // home page
     @GetMapping("/")
     public String home(Model model) {
         // count gudang with service
         var gudangCount = gudangService.countGudang();
-        // TODO count barang
+        // count barang
         var barangCount = barangService.countBarang();
-        // TODO count permintaan pengiriman
-        // TODO count karyawan
+        // count permintaan pengiriman
+        var permintaanCount = permintaanPengirimanService.countPermintaanPengiriman();
+        // count karyawan
+        var karyawanCount = karyawanService.countKaryawan();
+
         model.addAttribute("gudangCount", gudangCount);
         model.addAttribute("barangCount", barangCount);
+        model.addAttribute("permintaanCount", permintaanCount);
+        model.addAttribute("karyawanCount", karyawanCount);
+
         return "home";
     }
 

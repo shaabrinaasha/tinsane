@@ -109,4 +109,8 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
         permintaanPengirimanDb.deleteById(idPengiriman);
     }
 
+    @Override
+    public Long countPermintaanPengiriman() {
+        return permintaanPengirimanDb.count();
+    }
 }

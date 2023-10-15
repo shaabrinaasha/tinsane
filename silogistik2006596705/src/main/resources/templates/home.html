@@ -40,34 +40,58 @@
         </div>
         <div class="row gx-2">
           <div class="col mt-3">
-            <div class="menu bg-primary">
+            <a href="/gudang">
+              <div class="menu bg-primary">
+                <div class="d-flex flex-column text-center text-white p-3">
+                  <p style="font-size: large">Gudang</p>
+                  <p
+                    style="font-size: 50px; font-weight: bold"
+                    th:text="${gudangCount}"
+                  ></p>
+                  <p style="font-size: large">gudang</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col mt-3">
+            <a href="/barang">
+              <div class="menu" style="background-color: #3d8bfd">
+                <div class="d-flex flex-column text-center text-white p-3">
+                  <p style="font-size: large">Barang</p>
+                  <p
+                    style="font-size: 50px; font-weight: bold"
+                    th:text="${barangCount}"
+                  ></p>
+                  <p style="font-size: large">barang</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col mt-3">
+            <a href="/permintaan-pengiriman">
+              <div class="menu" style="background-color: #6ea8fe">
+                <div class="d-flex flex-column text-center text-white p-3">
+                  <p style="font-size: large">Permintaan Pengiriman</p>
+                  <p
+                    style="font-size: 50px; font-weight: bold"
+                    th:text="${permintaanCount}"
+                  ></p>
+                  <p style="font-size: large">permintaan pengiriman</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col mt-3">
+            <div class="menu" style="background-color: #9ec5fe">
               <div class="d-flex flex-column text-center text-white p-3">
-                <p style="font-size: large">Gudang</p>
+                <p style="font-size: large">Karyawan</p>
                 <p
                   style="font-size: 50px; font-weight: bold"
-                  th:text="${gudangCount}"
+                  th:text="${karyawanCount}"
                 ></p>
-                <p style="font-size: large">gudang</p>
+                <p style="font-size: large">karyawan</p>
               </div>
             </div>
-          </div>
-          <div class="col mt-3">
-            <div class="menu" style="background-color: #3d8bfd">
-              <div class="d-flex flex-column text-center text-white p-3">
-                <p style="font-size: large">Barang</p>
-                <p
-                  style="font-size: 50px; font-weight: bold"
-                  th:text="${barangCount}"
-                ></p>
-                <p style="font-size: large">barang</p>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-3">
-            <div class="menu" style="background-color: #6ea8fe"></div>
-          </div>
-          <div class="col mt-3">
-            <div class="menu" style="background-color: #9ec5fe"></div>
           </div>
         </div>
       </div>
