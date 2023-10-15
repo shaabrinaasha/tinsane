@@ -77,4 +77,19 @@ public class PermintaanPengirimanServiceImpl implements PermintaanPengirimanServ
         return permintaanPengirimanDb.findByIsCancelledFalse();
     }
 
+    @Override
+    public PermintaanPengiriman getPengirimanById(Long idPengiriman) {
+        for (PermintaanPengiriman permintaan : getAllPermintaan()) {
+            if (permintaan.getIdPengiriman() == idPengiriman) {
+                return permintaan;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<PermintaanPengiriman> getAllPermintaan() {
+        return permintaanPengirimanDb.findAll();
+    }
+
 }

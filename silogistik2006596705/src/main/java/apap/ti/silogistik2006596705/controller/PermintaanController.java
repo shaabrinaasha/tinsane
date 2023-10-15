@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import apap.ti.silogistik2006596705.DTO.CreatePermintaanDTO;
@@ -122,12 +123,18 @@ public class PermintaanController {
         permintaanPengirimanService.savePermintaanPengiriman(permintaan);
         // System.out.println(permintaan.toString());
 
+        // Update list & save again
+        for (PermintaanPengirimanBarang ppb : permintaan.getListPermintaanPengirimanBarang()) {
+            ppb.setPermintaanPengirimanId(permintaan);
+            permintaanPengirimanService.savePermintaanPengiriman(permintaan);
+        }
+
         // Var for thyme
         model.addAttribute("nomorPengiriman", generatedNomorPermintaan);
         return "success-create-permintaan";
     }
 
-    // TODO View all permintaan
+    // View all permintaan
     @GetMapping("/permintaan-pengiriman")
     public String viewAllPermintaan(Model model) {
         // get all permintaan via service via jpa
@@ -135,5 +142,16 @@ public class PermintaanController {
         model.addAttribute("listPermintaan", listPermintaan);
 
         return "viewall-permintaan";
+    }
+
+    // TODO Menapilkan detail permintaan pengiriman
+    @GetMapping("/permintaan-pengiriman/{idPermintaanPengiriman}")
+    public String detailPermintaan(
+            @PathVariable(value = "idPermintaanPengiriman") Long idPermintaanPengiriman,
+            Model model) {
+        // Get permintaan pengiriman by id buat ditampilin datanya
+        var permintaan = permintaanPengirimanService.getPengirimanById(idPermintaanPengiriman);
+        model.addAttribute("permintaan", permintaan);
+        return "detail-permintaan";
     }
 }

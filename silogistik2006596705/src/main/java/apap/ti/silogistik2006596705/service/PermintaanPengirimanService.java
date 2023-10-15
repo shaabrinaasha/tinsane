@@ -11,6 +11,12 @@ public interface PermintaanPengirimanService {
     // save permintaan pengiriman
     void savePermintaanPengiriman(PermintaanPengiriman permintaanPengiriman);
 
-    // get all pengiriman via jpa (yang ga kena soft delete)
+    // get all permintaan via jpa (yang ga kena soft delete)
     List<PermintaanPengiriman> getAllNotCancelledPermintaan();
+
+    // get permintaan by id
+    PermintaanPengiriman getPengirimanById(Long idPengiriman);
+
+    // get all permintaan
+    List<PermintaanPengiriman> getAllPermintaan();
 }

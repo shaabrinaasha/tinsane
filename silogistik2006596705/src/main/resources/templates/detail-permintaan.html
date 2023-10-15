@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add Fragment: css -->
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <!-- Add Fragment: js -->
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <title>Detail Permintaan Pengiriman</title>
+  </head>
+  <body>
+    <!-- Add Fragment: nav -->
+    <nav th:insert="~{fragments/navbar :: navbar}"></nav>
+    <div class="d-flex justify-content-center">
+      <div class="card w-75 mt-5">
+        <div class="card-header d-flex justify-content-between">
+          <h3 style="display: inline; margin-bottom: 0">
+            Detail Permintaan Pengiriman
+          </h3>
+          <div class="">
+            <a class="btn btn-danger" th:href="@{/}">Cancel Permintaan</a>
+          </div>
+        </div>
+        <div class="mt-4 mx-4 px-3">
+          <div class="row">
+            <div class="col-md-6">
+              <p>No. Permintaan Pengiriman</p>
+              <p>Waktu Permintaan</p>
+              <p>Karyawan Bertugas</p>
+              <p>Waktu Pengiriman</p>
+              <p>Nama Penerima</p>
+              <p>Alamat Penerima</p>
+              <p>Jenis Layanan</p>
+              <p>Biaya Pengiriman</p>
+            </div>
+            <div class="col-md-6">
+              <!-- <h2
+            th:text="'Barang dengan SKU ' + ${sku} + ' berhasil ditambahkan.'"
+          ></h2> -->
+              <p th:text="': '+${permintaan.nomorPengiriman}"></p>
+              <p th:text="': '+${permintaan.waktuPermintaan}"></p>
+              <p th:text="': '+${permintaan.karyawanId.nama}"></p>
+              <p th:text="': '+${permintaan.tanggalPengiriman}"></p>
+              <p th:text="': '+${permintaan.namaPenerima}"></p>
+              <p th:text="': '+${permintaan.alamatPenerima}"></p>
+              <p th:text="': '+${permintaan.jenisLayanan}"></p>
+              <p th:text="': '+${permintaan.biayaPengiriman}"></p>
+            </div>
+          </div>
+        </div>
+        <!-- Iteration Table -->
+        <div class="mt-4 mx-4 px-3">
+          <h5 style="font-weight: bold">Daftar barang dipesan</h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Merk</th>
+                <th scope="col">Kuantitas Pesanan</th>
+                <th scope="col">Total Harga</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                th:each="ppb, iStat: ${permintaan.listPermintaanPengirimanBarang}"
+              >
+                <td th:text="${iStat.index + 1}"></td>
+                <td th:text="${ppb.barangSkuRef.sku}"></td>
+                <td th:text="${ppb.barangSkuRef.merk}"></td>
+                <td th:text="${ppb.kuantitasPesanan}"></td>
+                <td th:text="'Rp'+ ${ppb.barangSkuRef.hargaBarang}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center m-4 px-3">
+          <a class="btn btn-secondary" href="/permintaan-pengiriman">Kembali</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
